@@ -1,7 +1,7 @@
 package com.kelevnor.weightwatchers_ex1.UTILITY;
 
 /**
- * Created by kelevnor on 2/7/18.
+ * Created by kelevnor on 8/25/18.
  */
 
 public class Config {

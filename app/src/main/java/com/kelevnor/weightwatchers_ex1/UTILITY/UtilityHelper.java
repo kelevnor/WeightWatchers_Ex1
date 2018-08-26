@@ -5,22 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialog;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.kelevnor.weightwatchers_ex1.REST.PullData;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
- * Created by kelevnor on 8/2/18.
+ * Created by kelevnor on 8/25/18.
  */
 
 public class UtilityHelper {

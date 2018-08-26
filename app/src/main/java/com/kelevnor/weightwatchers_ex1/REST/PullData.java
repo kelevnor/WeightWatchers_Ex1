@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
 /**
- * Created by kelevnor on 2/7/18.
+ * Created by kelevnor on 8/25/18.
  */
 
 public class PullData {
