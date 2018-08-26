@@ -49,4 +49,29 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl_fullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/colorMaxDark">
+        <ImageView
+            android:id="@+id/iv_imagefullscreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/bottom_padding_10"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGray"
+            android:padding="20dp"
+            android:textSize="@dimen/text_size_20"
+            android:layout_alignParentRight="true"
+            android:text="@string/fa_3_6_0_icon_remove"/>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

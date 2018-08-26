@@ -18,4 +18,5 @@
 
     //fontawesome images
     <string name="fa_3_6_0_icon_resize">&#xf065;</string>
+    <string name="fa_3_6_0_icon_remove">&#xf00d;</string>
 </resources>

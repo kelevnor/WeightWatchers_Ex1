@@ -28,11 +28,14 @@ import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.kelevnor.weightwatchers_ex1.ADAPTER.Adapter_ListItem;
+import com.kelevnor.weightwatchers_ex1.ImageLoader.ImageLoader;
 import com.kelevnor.weightwatchers_ex1.MODELS.Item;
 import com.kelevnor.weightwatchers_ex1.REST.PullData;
 import com.kelevnor.weightwatchers_ex1.UTILITY.Config;
@@ -44,7 +47,7 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PullData.OnAsyncResult, Permission_Request_Helper.OnAsyncResult, Adapter_ListItem.onItemClickListener, Switch.OnCheckedChangeListener{
+public class MainActivity extends AppCompatActivity implements PullData.OnAsyncResult, Permission_Request_Helper.OnAsyncResult, Adapter_ListItem.onItemClickListener, Switch.OnCheckedChangeListener, View.OnClickListener{
     Permission_Request_Helper permissionHelper;
     RecyclerView list;
     Switch enablePerm;
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
     ConstraintLayout clOuter;
     Typeface openSansRegular, openSansSemiBold, fontAwesome;
     TextView actionbarTitle, actionbarLoader;
+    RelativeLayout fullScreenLayout;
+    ImageView imageFullScreen;
+    TextView closeFullScreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,12 +78,17 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
         enablePerm = findViewById(R.id.sw_enableperm);
         enableInternet = findViewById(R.id.sw_enableinternet);
 
+        fullScreenLayout = findViewById(R.id.rl_fullscreen);
+        imageFullScreen = findViewById(R.id.iv_imagefullscreen);
+        closeFullScreen = findViewById(R.id.tv_close);
+
         openSansRegular = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
         openSansSemiBold = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Semibold.ttf");
         fontAwesome = Typeface.createFromAsset(getAssets(),"fonts/fontawesome-webfont.ttf");
 
         actionbarTitle.setTypeface(openSansSemiBold);
         actionbarLoader.setTypeface(openSansSemiBold);
+        closeFullScreen.setTypeface(fontAwesome);
 
         enablePerm.setTypeface(openSansSemiBold);
         enableInternet.setTypeface(openSansSemiBold);
@@ -88,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
         permissionHelper = new Permission_Request_Helper(this, this);
         permissionHelper.CheckGenericPermissions();
 
+        closeFullScreen.setOnClickListener(this);
 
     }
 
@@ -171,8 +183,11 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
                 .setAction(getResources().getString(R.string.bottombtn_view), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        Intent i = new Intent(MainActivity.this, ItemDisplayActivity.class);
-//                        startActivity(i);
+                        ImageLoader imageLoader = new ImageLoader(MainActivity.this);
+                        imageLoader.DisplayImage(Config.BASE_URL+item.getImage(), imageFullScreen, MainActivity.this);
+                        fullScreenLayout.setVisibility(View.VISIBLE);
+
+
 
                     }
                 });
@@ -233,5 +248,14 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
         };
         timer.start();
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.tv_close:
+                fullScreenLayout.setVisibility(View.GONE);
+                break;
+        }
     }
 }

@@ -4,7 +4,7 @@
         <shape android:shape="rectangle">
             <stroke android:width="@dimen/adapter_item_border" android:height="@dimen/adapter_item_border"
                 android:color="#FFFFFF" />
-            <solid android:color="#FFFFFF" />
+            <solid android:color="@color/colorPrimary" />
             <padding android:left="@dimen/adapter_item_border" android:top="@dimen/adapter_item_border" android:right="@dimen/adapter_item_border"
                 android:bottom="@dimen/adapter_item_border" />
         </shape>
