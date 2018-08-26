@@ -11,7 +11,11 @@
     <string name="bottombtn_dismiss">Dismiss</string>
     <string name="bottombtn_cancel">Cancel</string>
     <string name="bottombtn_ok">Ok</string>
+    <string name="bottombtn_view"></string>
 
     <string name="alert_permission">Enable Permission</string>
     <string name="alert_wifi">Enable Wifi</string>
+
+    //fontawesome images
+    <string name="fa_3_6_0_icon_resize">&#xf065;</string>
 </resources>

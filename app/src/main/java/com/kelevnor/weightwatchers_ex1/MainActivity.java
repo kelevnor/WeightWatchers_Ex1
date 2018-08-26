@@ -2,9 +2,13 @@ package com.kelevnor.weightwatchers_ex1;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.wifi.WifiManager;
 import android.os.CountDownTimer;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +41,7 @@ import com.kelevnor.weightwatchers_ex1.UTILITY.UtilityHelper;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements PullData.OnAsyncResult, Permission_Request_Helper.OnAsyncResult, Adapter_ListItem.onItemClickListener, Switch.OnCheckedChangeListener{
@@ -46,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
     Switch enableInternet;
     LinearLayout layout;
     Adapter_ListItem listAdapter;
-    Typeface openSansRegular, openSansSemiBold;
+    ConstraintLayout clOuter;
+    Typeface openSansRegular, openSansSemiBold, fontAwesome;
     TextView actionbarTitle, actionbarLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +67,14 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
         actionbarTitle = view.findViewById(R.id.tvTitle);
         actionbarLoader = view.findViewById(R.id.tvloader);
         layout = findViewById(R.id.ll_layout);
+        clOuter = findViewById(R.id.cl_outer);
         list = findViewById(R.id.list);
         enablePerm = findViewById(R.id.sw_enableperm);
         enableInternet = findViewById(R.id.sw_enableinternet);
 
         openSansRegular = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
         openSansSemiBold = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Semibold.ttf");
+        fontAwesome = Typeface.createFromAsset(getAssets(),"fonts/fontawesome-webfont.ttf");
 
         actionbarTitle.setTypeface(openSansSemiBold);
         actionbarLoader.setTypeface(openSansSemiBold);
@@ -79,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
 
         permissionHelper = new Permission_Request_Helper(this, this);
         permissionHelper.CheckGenericPermissions();
+
+
     }
 
     //PullData Interface Listener
@@ -155,8 +165,30 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
     }
 
     @Override
-    public void onItemClick(Item item) {
+    public void onItemClick(final Item item) {
+        Snackbar snackbar = Snackbar
+                .make(clOuter, "Title Picked: "+ item.getTitle(), Snackbar.LENGTH_LONG)
+                .setAction(getResources().getString(R.string.bottombtn_view), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        Intent i = new Intent(MainActivity.this, ItemDisplayActivity.class);
+//                        startActivity(i);
 
+                    }
+                });
+        TextView textViewText = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+
+        TextView textViewAction = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_action);
+
+        textViewText.setTextColor(getResources().getColor(R.color.colorMaxDark));
+        textViewText.setTypeface(openSansSemiBold);
+//        textViewText.setTextSize(getResources().getDimension(R.dimen.text_size_18));
+        textViewAction.setTextColor(getResources().getColor(R.color.colorAccent));
+        textViewAction.setTypeface(fontAwesome);
+        textViewAction.setText(getResources().getString(R.string.fa_3_6_0_icon_resize));
+//        textViewAction.setTextSize(getResources().getDimension(R.dimen.text_size_18));
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        snackbar.show();
     }
 
     //
