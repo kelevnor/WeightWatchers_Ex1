@@ -167,15 +167,12 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
 
                     }
                 });
-        TextView textViewText = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
 
+        TextView textViewText = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
         TextView textViewAction = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_action);
 
-        textViewText.setTextColor(getResources().getColor(R.color.colorMaxDark));
-        textViewText.setTypeface(openSansSemiBold);
-        textViewAction.setTextColor(getResources().getColor(R.color.colorAccent));
-        textViewAction.setTypeface(fontAwesome);
-        textViewAction.setText(getResources().getString(R.string.fa_3_6_0_icon_resize));
+        setSnackBarTextAction(textViewText, textViewAction);    //Setting style on SnackBar
+
         snackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorWhite));
         snackbar.show();
     }
@@ -226,5 +223,13 @@ public class MainActivity extends AppCompatActivity implements PullData.OnAsyncR
                 fullScreenLayout.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    public void setSnackBarTextAction(TextView text, TextView action){
+        text.setTextColor(getResources().getColor(R.color.colorMaxDark));
+        text.setTypeface(openSansSemiBold);
+        action.setTextColor(getResources().getColor(R.color.colorAccent));
+        action.setTypeface(fontAwesome);
+        action.setText(getResources().getString(R.string.fa_3_6_0_icon_resize));
     }
 }
